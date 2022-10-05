@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+
+{% if product.image %}
+        <img src="{{ product.image.url }}" width="'200" height="150" alt="Picture">
+{% else %}
+    <img src="{% static 'catalog.pics/default.jpg' %}">
+{% endif %}
+
+    <span class='lead'>Цена: {{ product.price }} $</span>
+        <p>Категория:{{ product.category }}</p>
+        <p>Описание:{{ product.description }}</p>
+        <p>Остаток на складе:{{ product.stock }}</p>
+        <p>{{ product.updated }}</p>
+        <p class="price">${{ product.price }}</p>
+            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                {{ cart_product_form }}
+                {% csrf_token %}
+        <input type="submit" value="Добавить в корзину">
+            </form>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+ <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center text-white">Магазин одежды</h1>
+          <div class="itd_play" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="itd_triangle"></div>
+          </div>
+            <a href="#category" class="btn btn-itd btn-lg text-uppercase text-white">Магазин</a>
+          </div>
+        </div>
+      </div>
+  </header>
+    <section id='category' class="category">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="text-center text-uppercase color2 mb-5">Категории</h2>
+            </div>
+          </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    {% for ct in category %}
+                    {% if ct.image %}
+                    <p><img src="{{ ct.image.url }}" width="500" height="350" alt="Picture"></p>
+                    {% else %}
+                        <img src="{% static 'catalog.pics/default.jpg' %}">
+                    {% endif %}
+                    <div class="col-md-4">
+                        <a href="{% url 'store:catalog-list' ct.id %}" class="btn btn-primary">{{ct.name}}</a>
+                    </div>
+                     {% endfor %}
+                </div>
+            </div>
+
+        </section>
+{% endblock content %}

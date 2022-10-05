@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link href="/static/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+{%  for pr in product %}
+{% if pr.image %}
+        <img src="{{ pr.image.url }}" width="'200" height="150" alt="Picture">
+{% else %}
+    <img src="{% static 'catalog.pics/default.jpg' %}">
+{% endif %}
+            <div class="col-md-4">
+                <p>{{pr.name}}</p>
+                <p>Цена: {{ pr.price }} $ </p>
+                <p>Описание: {{ pr.description }}</p>
+                <a href="{% url 'store:product-detail' pr.pk %}" class="btn btn-primary">Хочу купить!</a>
+             </div>
+
+{% endfor %}
+
+
+{% endblock content %}
